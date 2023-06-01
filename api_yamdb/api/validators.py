@@ -1,6 +1,6 @@
 import re
-
 from rest_framework.serializers import ValidationError
+
 
 PROHIBITED_USERNAMES = ['me', 'mi', 'my', 'i']
 
