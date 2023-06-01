@@ -1,30 +1,28 @@
-from django.db import IntegrityError
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
+from django.db import IntegrityError
 from django.db.models import Avg
-from rest_framework.mixins import (DestroyModelMixin,
-                                   CreateModelMixin,
-                                   ListModelMixin)
+from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import permissions, status, viewsets, filters
+from rest_framework import filters, permissions, status, viewsets
 from rest_framework.decorators import action
+from rest_framework.mixins import (CreateModelMixin, DestroyModelMixin,
+                                   ListModelMixin)
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.serializers import ValidationError
-from rest_framework_simplejwt.tokens import AccessToken
 from rest_framework.views import APIView
-from django.shortcuts import get_object_or_404
-from reviews.models import User
-from .permissions import (IsAdmin, IsAdminOrReadOnly,
-                          IsAdminModeratorOwnerOrReadOnly)
-from .serializers import (
-    RegisterDataSerializer, UserEditSerializer, UserSerializer,
-    TokenSerializer, CategorySerializer, GenreSerializer,
-    TitleSerializer, WatchTitleSerializer, CommetSerializer,
-    ReviewSerializer
-)
-from reviews.models import (Category, Genre, Title, Comment, Review)
+from rest_framework_simplejwt.tokens import AccessToken
+from reviews.models import Category, Comment, Genre, Review, Title, User
+
 from .filters import TitleFilter
+from .permissions import (IsAdmin, IsAdminModeratorOwnerOrReadOnly,
+                          IsAdminOrReadOnly)
+from .serializers import (CategorySerializer, CommetSerializer,
+                          GenreSerializer, RegisterDataSerializer,
+                          ReviewSerializer, TitleSerializer, TokenSerializer,
+                          UserEditSerializer, UserSerializer,
+                          WatchTitleSerializer)
 
 
 class SignUpView(APIView):
