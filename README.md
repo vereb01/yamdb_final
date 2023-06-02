@@ -1,6 +1,7 @@
 ![vereb01/yamdb_final](https://github.com/vereb01/yamdb_final-1/actions/workflows/yamdb_workflow.yml/badge.svg)
 
 Проект доступен по адресу http://158.160.44.240/api/v1/
+b yt 
 
 yamdb_final (API YaMDb)
 API интернет-сервиса YaMDB для хранения рецензий на произведения
