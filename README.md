@@ -9,3 +9,83 @@ API интернет-сервиса YaMDB для хранения рецензи
 
 
 Стек: Python 3.7, Django, DRF, Simple-JWT, PostgreSQL, Docker, nginx, gunicorn, GitHub Actions (CI/CD).
+
+### Шаблон наполнения env-файла:
+    DB_ENGINE=django.db.backends.postgresql
+    DB_NAME=postgres
+    POSTGRES_USER=postgres
+    POSTGRES_PASSWORD=postgres 
+    DB_HOST=db
+    DB_PORT=5432 
+
+### Развертывание проекта:
+
+Клонируем репозиторий к себе на ПК:
+
+```bash
+  git clone https://github.com/vereb01/yamdb_final.git
+```
+
+Переходим в дерикторию с проектом:
+
+```bash
+  cd yamdb_final
+  cd api_yamdb
+```
+
+Устанавливаем Виртуальное окружение:
+
+```bash
+  python -m venv venv
+```
+
+Активируем виртуальное окружение:
+
+```bash
+  source venv/Scripts/activate
+```
+
+Устанавливаем зависимости:
+
+```bash
+  pip install -r requirements.txt
+```
+
+Переходим в папку с файлом docker-compose.yaml:
+
+```bash
+  cd infra
+```
+
+Поднимаем контейнеры:
+
+```bash
+  docker-compose up -d --build
+```
+
+Выполняем миграции:
+
+```bash
+  docker-compose exec web python manage.py makemigrations reviews
+
+  docker-compose exec web python manage.py migrate
+```
+
+Создаем суперпользователя:
+
+```bash
+  docker-compose exec web python manage.py createsuperuser
+```
+
+Србираем статику:
+
+```bash
+  docker-compose exec web python manage.py collectstatic --no-input
+```
+Cоздать резервную копию БД командой:
+
+```bash
+docker-compose exec web python manage.py loaddata fixtures.json
+```
+
+
